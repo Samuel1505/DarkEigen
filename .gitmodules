@@ -7,3 +7,21 @@
 [submodule "lib/hookmate"]
 	path = lib/hookmate
 	url = https://github.com/akshatmittal/hookmate
+[submodule "lib/eigenlayer-contracts"]
+	path = lib/eigenlayer-contracts
+	url = https://github.com/Layr-Labs/eigenlayer-contracts
+[submodule "lib/eigenlayer-middleware"]
+	path = lib/eigenlayer-middleware
+	url = https://github.com/Layr-Labs/eigenlayer-middleware
+[submodule "lib/eigenlayer-avs-playgrounds"]
+	path = lib/eigenlayer-avs-playgrounds
+	url = https://github.com/Layr-Labs/eigenlayer-avs-playgrounds
+[submodule "lib/openzeppelin-contracts"]
+	path = lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "lib/v4-periphery"]
+	path = lib/v4-periphery
+	url = https://github.com/Uniswap/v4-periphery
+[submodule "lib/v4-core"]
+	path = lib/v4-core
+	url = https://github.com/Uniswap/v4-core
