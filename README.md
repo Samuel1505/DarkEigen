@@ -1,4 +1,5 @@
 # DarkEigen Hook 🌊⚡
+ UHI6 Hookathon Submission 
 
 A decentralized, privacy-focused trading platform built on Ethereum using EigenLayer Actively Validated Services (AVS) and Uniswap v4 Hooks to enable secure, large-volume, cross-chain token swaps with robust MEV protection.
 
@@ -273,9 +274,6 @@ Before mainnet deployment:
 
 MIT License - see LICENSE file for details
 
-## Disclaimer
-
-This is experimental software. Use at your own risk. Always test thoroughly on testnets before mainnet deployment.
 
 ## Support
 
