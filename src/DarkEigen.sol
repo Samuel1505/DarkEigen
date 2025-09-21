@@ -5,6 +5,7 @@ import {BaseHook} from "v4-periphery/src/utils/BaseHook.sol";
 import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
+import {SwapParams} from "v4-core/src/types/SwapParams.sol";  // <-- ADD THIS IMPORT
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
 import {BeforeSwapDelta, BeforeSwapDeltaLibrary} from "v4-core/src/types/BeforeSwapDelta.sol";
@@ -146,7 +147,7 @@ contract DarkEigenHook is BaseHook, Ownable, ReentrancyGuard {
         uint256 deadline,
         uint256 nonce,
         PoolKey calldata key,
-        IPoolManager.SwapParams calldata params
+        SwapParams calldata params  // <-- FIXED: Removed IPoolManager.
     ) external nonReentrant {
         PrivateOrder storage order = privateOrders[orderHash];
         
@@ -234,7 +235,7 @@ contract DarkEigenHook is BaseHook, Ownable, ReentrancyGuard {
         return BaseHook.beforeInitialize.selector;
     }
 
-    function beforeSwap(address, PoolKey calldata key, IPoolManager.SwapParams calldata, bytes calldata)
+    function beforeSwap(address, PoolKey calldata key, SwapParams calldata, bytes calldata)  // <-- FIXED: Removed IPoolManager. (and named it for clarity, but unnamed is fine too)
         external
         override
         returns (bytes4, BeforeSwapDelta, uint24)
@@ -247,7 +248,7 @@ contract DarkEigenHook is BaseHook, Ownable, ReentrancyGuard {
         return (BaseHook.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, 0);
     }
 
-    function afterSwap(address, PoolKey calldata, IPoolManager.SwapParams calldata, BalanceDelta, bytes calldata)
+    function afterSwap(address, PoolKey calldata, SwapParams calldata, BalanceDelta, bytes calldata)  // <-- FIXED: Removed IPoolManager.
         external
         override
         returns (bytes4, int128)
