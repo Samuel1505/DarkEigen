@@ -1,6 +1,6 @@
 # DarkEigen Hook 🌊⚡
 
-A decentralized, privacy-focused trading platform built on Ethereum using EigenLayer Actively Validated Services (AVS) and Uniswap v4 Hooks to enable secure, large-volume, cross-chain token swaps with robust MEV protection.
+DarkEigenHook is a sophisticated Uniswap V4 hook contract that extends the base BaseHook from V4 periphery, integrating EigenLayer's Actively Validated Services (AVS) for staking and slashing, while adding privacy-focused order execution (to mitigate MEV attacks) and simplified cross-chain swap functionality. It's designed for DeFi applications emphasizing security, decentralization, and interoperability, with built-in protections like reentrancy guards and commit-reveal schemes.
 
 ## Features
 

@@ -5,7 +5,7 @@ import {BaseHook} from "v4-periphery/src/utils/BaseHook.sol";
 import {Hooks} from "v4-core/src/libraries/Hooks.sol";
 import {IPoolManager} from "v4-core/src/interfaces/IPoolManager.sol";
 import {PoolKey} from "v4-core/src/types/PoolKey.sol";
-import {SwapParams} from "v4-core/src/types/SwapParams.sol";  // <-- ADD THIS IMPORT
+import {SwapParams} from "v4-core/src/types/PoolOperation.sol";  // From your types dir
 import {PoolId, PoolIdLibrary} from "v4-core/src/types/PoolId.sol";
 import {BalanceDelta} from "v4-core/src/types/BalanceDelta.sol";
 import {BeforeSwapDelta, BeforeSwapDeltaLibrary} from "v4-core/src/types/BeforeSwapDelta.sol";
@@ -147,7 +147,7 @@ contract DarkEigenHook is BaseHook, Ownable, ReentrancyGuard {
         uint256 deadline,
         uint256 nonce,
         PoolKey calldata key,
-        SwapParams calldata params  // <-- FIXED: Removed IPoolManager.
+        SwapParams calldata params
     ) external nonReentrant {
         PrivateOrder storage order = privateOrders[orderHash];
         
@@ -228,18 +228,19 @@ contract DarkEigenHook is BaseHook, Ownable, ReentrancyGuard {
     // Hook implementations
     function beforeInitialize(address, PoolKey calldata key, uint160, bytes calldata)
         external
-        override
         returns (bytes4)
     {
         enabledPools[key.toId()] = true;
         return BaseHook.beforeInitialize.selector;
     }
 
-    function beforeSwap(address, PoolKey calldata key, SwapParams calldata, bytes calldata)  // <-- FIXED: Removed IPoolManager. (and named it for clarity, but unnamed is fine too)
-        external
-        override
-        returns (bytes4, BeforeSwapDelta, uint24)
-    {
+    // FIXED: Override internal _beforeSwap (not external)
+    function _beforeSwap(
+        address,
+        PoolKey calldata key,
+        SwapParams calldata,
+        bytes calldata
+    ) internal override returns (bytes4, BeforeSwapDelta, uint24) {
         require(enabledPools[key.toId()], "Pool not enabled for DarkEigen");
         
         // MEV protection logic can be added here
@@ -248,11 +249,14 @@ contract DarkEigenHook is BaseHook, Ownable, ReentrancyGuard {
         return (BaseHook.beforeSwap.selector, BeforeSwapDeltaLibrary.ZERO_DELTA, 0);
     }
 
-    function afterSwap(address, PoolKey calldata, SwapParams calldata, BalanceDelta, bytes calldata)  // <-- FIXED: Removed IPoolManager.
-        external
-        override
-        returns (bytes4, int128)
-    {
+    // FIXED: Override internal _afterSwap (not external)
+    function _afterSwap(
+        address,
+        PoolKey calldata,
+        SwapParams calldata,
+        BalanceDelta,
+        bytes calldata
+    ) internal override returns (bytes4, int128) {
         // Post-swap validation and logging
         return (BaseHook.afterSwap.selector, 0);
     }
