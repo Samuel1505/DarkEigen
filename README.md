@@ -1,4 +1,5 @@
 # DarkEigen Hook 🌊⚡
+ UHI6 Hookathon Submission 
 
 DarkEigenHook is a sophisticated Uniswap V4 hook contract that extends the base BaseHook from V4 periphery, integrating EigenLayer's Actively Validated Services (AVS) for staking and slashing, while adding privacy-focused order execution (to mitigate MEV attacks) and simplified cross-chain swap functionality. It's designed for DeFi applications emphasizing security, decentralization, and interoperability, with built-in protections like reentrancy guards and commit-reveal schemes.
 
@@ -273,9 +274,6 @@ Before mainnet deployment:
 
 MIT License - see LICENSE file for details
 
-## Disclaimer
-
-This is experimental software. Use at your own risk. Always test thoroughly on testnets before mainnet deployment.
 
 ## Support
 
